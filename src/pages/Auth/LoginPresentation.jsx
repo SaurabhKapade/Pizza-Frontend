@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
-function LoginPresentation() {
-    return (
-        <>
-            <section className="text-gray-600 body-font">
+function LoginPresentation({handleLoginInput , handleLoginSubmit}) {
+  return (
+     <>
+         <section className="text-gray-600 body-font">
                 <div className="flex flex-wrap items-center h-screen px-10 py-6 mx-auto">
                 <div className="hidden p-0 lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 md:block">
                     <svg
@@ -13,6 +13,7 @@ function LoginPresentation() {
                     height="520.13854"
                     viewBox="0 0 869.99994 520.13854"
                     xmlnsXlink="http://www.w3.org/1999/xlink"
+                     className="md:h-5/6 w-full"
                     >
                     <path
                         d="M831.09242,704.18737c-11.13833-9.4118-17.90393-24.27967-16.12965-38.75366s12.76358-27.78,27.01831-30.85364,30.50415,5.43465,34.83378,19.3594c2.3828-26.84637,5.12854-54.81757,19.40179-77.67976,12.92407-20.70115,35.3088-35.51364,59.5688-38.16357s49.80265,7.35859,64.93272,26.50671,18.83461,46.98549,8.2379,68.96911c-7.80623,16.19456-22.188,28.24676-37.2566,38.05184a240.45181,240.45181,0,0,1-164.45376,35.97709Z"
@@ -153,7 +154,8 @@ function LoginPresentation() {
                                 type="email" 
                                 id="email" 
                                 name="email"
-                                required 
+                                required
+                                onChange={handleLoginInput} 
                                 placeholder="John@example.com"
                                 className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
                         </div>
@@ -165,13 +167,16 @@ function LoginPresentation() {
                                 id="password" 
                                 name="password" 
                                 required 
+                                onChange={handleLoginInput}
                                 placeholder="Enter your password"
                                 className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
                         </div>
 
                         <button 
                             type="submit"
-                            className="w-full px-8 py-2 text-lg text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600">
+                            className="w-full px-8 py-2 text-lg text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600"
+                            onClick={handleLoginSubmit}
+                            >
                             Sign In
                         </button>
 
@@ -181,8 +186,8 @@ function LoginPresentation() {
                     </form>
                 </div>
             </section>
-        </>
-    )
+     </>
+  )
 }
 
-export default LoginPresentation;
+export default LoginPresentation
