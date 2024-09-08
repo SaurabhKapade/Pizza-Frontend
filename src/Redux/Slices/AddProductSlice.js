@@ -13,11 +13,7 @@ const initialState = {
 export const addProduct = createAsyncThunk('/Add/Product',async(data)=>{
     try{
         // const response = axiosInstance.post('/product/add',data)
-        const response = await axiosInstance.post('/product/add', data, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
+        const response = await axiosInstance.post('/product/add',data);
         toast.promise(response,{
             success:(resolvedPromise)=>{
                 return resolvedPromise?.data?.message;
@@ -38,6 +34,7 @@ const AddProductSlice = createSlice({
     name:'addProduct',
     initialState,
     reducers:{},
+    // extraReducers:{}
 
 })
 

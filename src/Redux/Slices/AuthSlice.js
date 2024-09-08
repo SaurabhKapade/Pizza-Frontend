@@ -85,6 +85,7 @@ const AuthSlice = createSlice({
             localStorage.setItem('isLoggedIn',true)
             localStorage.setItem('role',action?.payload?.data?.data?.userRole)
             localStorage.setItem('data',JSON.stringify(action?.payload?.data?.data?.userData))
+            console.log(action?.payload?.data)
         })
         .addCase(logout.fulfilled,(state)=>{
             localStorage.clear()
