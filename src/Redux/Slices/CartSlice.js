@@ -9,19 +9,19 @@ const initialState={
 export const addToCart= createAsyncThunk('/Cart/Add',async(id)=>{
     try {
         const response = await axiosInstance.post(`/carts/add/${id}`)
-        toast.success('Item added to cart')
+        toast.success(response.data?.message)
         return response.data
     } catch (error) {
-        toast.error('Something went wrong')
+        toast.error(error.response?.data?.message)
     }
 })
 export const removeFromCart= createAsyncThunk('/Cart/Remove',async(id)=>{
     try {
         const response = await axiosInstance.post(`/carts/remove/${id}`)
+        toast.success('product Removed from Cart')
         return response.data
     } catch (error) {
-        console.log(error)
-        toast.error('Something went wrong...')
+        toast.error(error.response?.data?.message)
     }
 })
 export const getCartDetails = createAsyncThunk('/Cart/getCart',async()=>{
