@@ -8,8 +8,9 @@ import EnjoyFood from "../assets/images/enjoy.png";
 import Layout from "../Layouts/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../Redux/Slices/ProductSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ProductCard from "../Components/Cards/ProductCard";
+import toast from "react-hot-toast";
 function Home() {
   const dispatch = useDispatch();
 
@@ -60,7 +61,7 @@ function Home() {
         </section>
 
         {/**Products Listing Here */}
-        <div className=" px-5 justify-center items-center">
+        <div className=" pl-2 pr-2 justify-center items-center">
           <section className=" mt-6 flex flex-wrap justify-around items-center">
             {productsData.map((product) => (
               <div key={product._id}>
@@ -70,6 +71,7 @@ function Home() {
                   image={product.productImage}
                   price={product.price}
                   description={product.description}
+                  id={product._id}
                 />
               </div>
             ))}
@@ -85,14 +87,14 @@ function Home() {
         <section
           className="py-4 mt-6 bg-gradient-to-r 
                 from-amber-50 to-orange-300"
+      
         >
-          <div className="container flex flex-col md:flex-row">
+          <div className="flex flex-col md:flex-row ">
             <div className="flex flex-col items-center justify-center rounded-lg lg:w-1/2">
               <img
                 src={CookingImage}
                 alt="Cooking"
-                width={500}
-                className="rounded-lg"
+                className="w-80 md:w-full rounded-lg lg:w-3/4"
               />
             </div>
 
@@ -102,26 +104,26 @@ function Home() {
                   <h2 className="mb-2 text-5xl font-extrabold text-transparent title-font bg bg-gradient-to-r from-orange-600 to-orange-300 bg-clip-text">
                     Cooked by the best <br /> chefs in the world
                   </h2>
-                  <p className="text-base leading-relaxed text-[#6b7289]">
+                  <p className=" ml-2 mr-2 lg:ml-0 lg:mr-0 text-base leading-relaxed text-[#6b7289]">
                     There are many benefits regarding to that but the main ones
                     are:
                   </p>
                 </div>
               </div>
               <div className="w-full p-1">
-                <div className="flex items-center h-full p-2 text-2xl rounded">
+                <div className="flex items-center h-full p-2 text-2xl rounded ml-2 lg:ml-0">
                   <IconPatchCheck className="text-[#f38339] w-10 h-10 mr-4" />
-                  <span className="font-bold title-font">Perfect taste</span>
+                  <span className="font-bold title-font ">Perfect taste</span>
                 </div>
               </div>
               <div className="w-full p-1">
-                <div className="flex items-center h-full p-2 text-2xl rounded">
+                <div className="flex items-center h-full p-2 text-2xl rounded ml-2 lg:ml-0">
                   <IconPatchCheck className="text-[#f38339] w-10 h-10 mr-4" />
                   <span className="font-bold title-font">Prepared quickly</span>
                 </div>
               </div>
               <div className="w-full p-1">
-                <div className="flex items-center h-full p-2 text-2xl rounded">
+                <div className="flex items-center h-full p-2 text-2xl rounded ml-2 lg:ml-0">
                   <IconPatchCheck className="text-[#f38339] w-10 h-10 mr-4" />
                   <span className="font-bold title-font">
                     Food hygine guranteed
@@ -135,7 +137,7 @@ function Home() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap space-y-6 md:space-y-0">
+              <div className="flex justify-center flex-wrap space-y-6 md:space-y-0">
                 <div className="flex flex-col items-center text-center p-4 md:w-1/3">
                   <div className="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mb-5 bg-yellow-100 rounded-full">
                     <img src={OrderFood} alt="orderFood" />
@@ -187,19 +189,29 @@ function Home() {
         </section>
 
         {/**About us and Map section */}
-        <section className="flex justify-between px-9 py-9">
+        <section className="lg:flex justify-between pl-4 pr-6">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3721.469754039467!2d75.80551043682213!3d21.13369591462839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1725766454458!5m2!1sen!2sin"
-            width="600"
-            height="450"
-            style={{border:'0'}}
+            style={{ border: "0" }}
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
+            className="pl-2 pt-4 mb-4 w-full h-64 lg:w-1/2 lg:h-96 lg:pt-4 lg:mb-4"
           ></iframe>
-
-          <div>
-            <h1>About Us</h1>
+          <div className=" ml-2 lg:w-1/2 lg:ml-8 mt-8 lg:-mt-8 text-gray-500 lg: flex flex-col justify-center items-center">
+            <h1 className="text-3xl font-semibold mb-6">About Us</h1>
+            <p className="text-lg leading-relaxed">
+              At <span className="text-xl font-semibold text-gray-500">Pizza-Corner</span>, we believe in delivering more than just
+              service/product. Our mission is to create experiences that leave
+              a lasting impression, through innovative solutions and
+              personalized service.
+            </p>
+            <p className="text-lg leading-relaxed mt-4 mb-6">
+              Located at the heart of <span className="text-xl font-semibold text-gray-500">Customers</span>, we invite you to connect with
+              us, explore our offerings, and see how we can help you reach your
+              goals. We are committed to being your trusted partner in
+              [industry/service focus].
+            </p>
           </div>
         </section>
       </Layout>

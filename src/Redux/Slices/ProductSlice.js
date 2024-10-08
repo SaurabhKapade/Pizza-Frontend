@@ -10,18 +10,21 @@ const initialState = {
 export const fetchProducts = createAsyncThunk('/get/AllProducts',async()=>{
     try{
         const response = await  axiosInstance.get('/product/')
-        // toast.promise(response,{
-        //    loading:'loading all the products',
-        //    error:'Something went wront, Cannot load Products',
-        //    success:'Products loaded successfully'
-        // })
-        
         const apiResponse =  response
-        console.log('api response is ',apiResponse)
         return apiResponse
     }catch(error){
         console.log('error is',error)
         toast.error('cannot load products...')
+    }
+})
+
+export const fectchProduct = createAsyncThunk('/get/Product',async(id)=>{
+    try {
+        const response = await axiosInstance.get(`/product/${id}`)
+        return  response
+    } catch (error) {
+        console.log(error)
+        toast.error('cannot get Product...')
     }
 })
 

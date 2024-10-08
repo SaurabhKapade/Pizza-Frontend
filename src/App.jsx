@@ -4,6 +4,9 @@ import SignUp from "./pages/Auth/SignUp"
 import Home from "./pages/Home"
 import { Route, Routes } from "react-router-dom"
 import NotFound from "./pages/NotFound"
+import Search from "./pages/Search/Search"
+import ProductDetails from "./pages/Products/ProductDetails"
+import Cart from "./pages/Cart/Cart"
 const role = localStorage.getItem('role')
 function App() {
 
@@ -13,6 +16,9 @@ function App() {
         <Route path = "/" element={<Home/>}/>
         <Route path = "/auth/signup" element={<SignUp/>}/>
         <Route path = "/auth/login" element={<Login/>}/>
+        <Route path = "/search-pizzas" element={<Search/>}/>
+        <Route path = "/product/:productId" element = {<ProductDetails/>}/>
+        <Route path = "/cart" element={<Cart/>}/>
         {
           (role=='ADMIN')?<Route path = "/admin" element={<AddProduct/>}/>:<Route path = "*" element={<NotFound/>}/>
         }

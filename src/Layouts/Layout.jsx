@@ -3,7 +3,7 @@ import pizzaLogo from "../assets/images/pizza1.png";
 import Footer from "../Components/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../Redux/Slices/AuthSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 function Layout({ children }) {
@@ -16,6 +16,8 @@ function Layout({ children }) {
     username: state.auth.data.firstName,
     role: state.auth.role,
   }));
+  const {length} = useSelector((state)=> state.cart)
+  useEffect(()=>{},[length])
 
   // Local state for mobile menu and dropdown menu
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -47,8 +49,8 @@ function Layout({ children }) {
 
         {/* Logo and App Name */}
         <div className="flex items-center justify-center">
-          <p className="text-xl font-bold">Pizza App</p>
-          <img src={pizzaLogo} alt="Pizza Logo" className="h-8 w-8 ml-2" />
+          <p className="text-xl font-bold">Pizza Corner</p>
+          <Link to={"/"}><img src={pizzaLogo} alt="Pizza Logo" className="h-8 w-8 ml-2" /></Link>
         </div>
 
         {/* Desktop Links */}
@@ -56,6 +58,18 @@ function Layout({ children }) {
           <Link to="/menu" className="hover:text-[#ff9110]">Menu</Link>
           <Link to="/services" className="hover:text-[#ff9110]">Services</Link>
           <Link to="/about" className="hover:text-[#ff9110]">About</Link>
+        
+
+        {(isLoggedIn)&&
+              <div className="relative bg-none hover:bg-none">
+                      <span className="px-4 -ml-4">
+                        <Link to="/cart"className="hover:text-[#ff9110]">Cart</Link>
+                      </span>
+                      {
+                        (length!=0)&& <div className="absolute text-gray-900 bg-slate-300 h-4 w-4 rounded-full flex items-center justify-center -mt-9 ml-11">{length}</div>
+                      }
+
+              </div>}
         </div>
 
         {/* User Profile Section */}
@@ -79,6 +93,15 @@ function Layout({ children }) {
                     <li className="px-4 py-2 hover:bg-gray-100">
                       <Link to="/profile" onClick={() => setDropdownOpen(false)}>Profile</Link>
                     </li>
+                    { <div className="relative">
+                      <li className="px-4 py-2 hover:bg-gray-100">
+                        <Link to="/cart" onClick={() => setDropdownOpen(false)}>cart</Link>
+                      </li> 
+                      {
+                        (length!=0)&& <div className="absolute text-gray-900 bg-slate-300 h-4 w-4 rounded-full flex items-center justify-center -mt-9 ml-11">{length}</div>
+                      }
+
+                    </div> }
                     <li className="px-4 py-2 hover:bg-gray-100">
                       <Link to="/settings" onClick={() => setDropdownOpen(false)}>Settings</Link>
                     </li>
@@ -104,7 +127,7 @@ function Layout({ children }) {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-md">
+        <div className="md:hidden bg-transparent shadow-md">
           <ul className="flex flex-col items-center space-y-4 py-4">
             <li>
               <Link to="/menu" onClick={() => setMenuOpen(false)} className="hover:text-[#ff9110]">Menu</Link>
@@ -117,9 +140,6 @@ function Layout({ children }) {
             </li>
             {isLoggedIn && (
               <>
-                <li>
-                  <Link to="/profile" onClick={() => setMenuOpen(false)} className="hover:text-[#ff9110]">Profile</Link>
-                </li>
                 <li>
                   <Link to="/settings" onClick={() => setMenuOpen(false)} className="hover:text-[#ff9110]">Settings</Link>
                 </li>

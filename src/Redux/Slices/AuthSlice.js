@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axiosInstance from "../../Helpers/axiosInstance"
 import toast from "react-hot-toast";
 const initialState = {
-    isLoggedIn:localStorage.getItem('isLoggedIn')==='true' || false,
+    isLoggedIn:localStorage.getItem('isLoggedIn') === 'true' || false,
     role:localStorage.getItem('role') || '',
     data:JSON.parse(localStorage.getItem('data')) || {}
 }
@@ -35,7 +35,7 @@ export const login = createAsyncThunk('Auth/login',async(data)=>{
         const response = axiosInstance.post('/auth/login',data)
         toast.promise(response,{
             success:(resolvedPromise)=>{
-                return resolvedPromise?.data?.message;
+                return (`welcome ${resolvedPromise?.data?.data?.userData?.firstName}`);
             },
             loading:'Wait for a short',
             error:(error)=>{
@@ -85,7 +85,6 @@ const AuthSlice = createSlice({
             localStorage.setItem('isLoggedIn',true)
             localStorage.setItem('role',action?.payload?.data?.data?.userRole)
             localStorage.setItem('data',JSON.stringify(action?.payload?.data?.data?.userData))
-            console.log(action?.payload?.data)
         })
         .addCase(logout.fulfilled,(state)=>{
             localStorage.clear()
