@@ -91,16 +91,13 @@ function Layout({ children }) {
                   </p>
                   <ul className="py-2">
                     <li className="px-4 py-2 hover:bg-gray-100">
-                      <Link to="/profile" onClick={() => setDropdownOpen(false)}>Profile</Link>
+                      <Link to="/profile/account-settings" onClick={() => setDropdownOpen(false)}>Profile</Link>
                     </li>
                     { <div className="relative">
                       <li className="px-4 py-2 hover:bg-gray-100">
                         <Link to="/cart" onClick={() => setDropdownOpen(false)}>cart</Link>
                       </li> 
-                      {
-                        (length!=0)&& <div className="absolute text-gray-900 bg-slate-300 h-4 w-4 rounded-full flex items-center justify-center -mt-9 ml-11">{length}</div>
-                      }
-
+                     
                     </div> }
                     <li className="px-4 py-2 hover:bg-gray-100">
                       <Link to="/settings" onClick={() => setDropdownOpen(false)}>Settings</Link>

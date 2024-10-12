@@ -7,6 +7,9 @@ import NotFound from "./pages/NotFound"
 import Search from "./pages/Search/Search"
 import ProductDetails from "./pages/Products/ProductDetails"
 import Cart from "./pages/Cart/Cart"
+import Profile from "./pages/Account/Profile"
+import AccountSettings from "./pages/Account/AccountSettings"
+import ManageAddress from "./pages/Account/ManageAddress"
 const role = localStorage.getItem('role')
 function App() {
 
@@ -22,7 +25,10 @@ function App() {
         {
           (role=='ADMIN')?<Route path = "/admin" element={<AddProduct/>}/>:<Route path = "*" element={<NotFound/>}/>
         }
-        
+        <Route path = "/profile" element={<Profile/>}>
+            <Route path="/profile/account-settings" element={<AccountSettings/>}/>
+            <Route path="/profile/manage-address" element={<ManageAddress/>}/>
+        </Route>
         <Route path = "*" element={<NotFound/>}/>
       </Routes>
     </>

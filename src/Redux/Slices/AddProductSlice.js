@@ -51,24 +51,26 @@ const initialState = {
   price: "",
   quantity: "",
   category: "",
-  productImage: null, // null for the file input
+  productImage: null, 
 };
 
 export const addProduct = createAsyncThunk("/Add/Product", async (data) => {
   try {
-    //const response = axiosInstance.post('/product/add',data)
-    const response = await axiosInstance.post("/product/add", data);
+   
+    const response =  axiosInstance.post("/product/add", data);
     toast.promise(response, {
+    
       success: (resolvedPromise) => {
         return resolvedPromise?.data?.message;
       },
-      loading: "Wait for a short",
+      loading:"uploading product...",
       error: (error) => {
         console.log("promise is ", error);
         return error.response.data.message;
       },
     });
     const apiResponse = await response;
+    console.log('slice response is ',apiResponse)
     return apiResponse;
   } catch (error) {
     console.log(error);
@@ -81,12 +83,15 @@ const AddProductSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addProduct.fulfilled, () => {
-        // Handle successful product addition
-        toast.success("Product added successfully!");
+      .addCase(addProduct.fulfilled, (state,action) => {
+        state.productName= "",
+        state.description= "",
+        state.price="",
+        state.quantity= "",
+        state.category= "",
+        state.productImage= null
       })
       .addCase(addProduct.rejected, () => {
-        // Handle failure
         toast.error("Failed to add product");
       });
   },

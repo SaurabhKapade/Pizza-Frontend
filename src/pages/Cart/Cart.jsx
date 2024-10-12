@@ -10,18 +10,16 @@ import { useEffect, useState } from "react";
 import EmptyCart from "./EmptyCart";
 import FetchingCart from "./FetchingCart";
 import { RiDeleteBinLine } from "react-icons/ri";
-import CartHeader from "./CartHeader";
 import IconArrowRight from "../../Components/icons/IconArrowRight";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoggedIn] = useState(true);
   const [total, setTotal] = useState(0);
   async function getProducts() {
     const response = await dispatch(getCartDetails());
     setProducts(response.payload.data.items);
-    setIsLoggedIn(false);
   }
 
   async function handleIncreaseQuantity(param) {
@@ -143,7 +141,7 @@ function Cart() {
               <p className="text-lg font-semibol">Total : <span className="text-xl font-bold ">{`₹${total}`}</span></p>
               
             </div>
-            <button
+            <Link to="/orders"><button 
               className="flex items-center px-3 py-1 text-white w-28
                         bg-orange-400 rounded-md hover:bg-orange-500 group"
             >
@@ -151,7 +149,7 @@ function Cart() {
               <span className="inline-block ml-2 transition-transform ease-in-out group-hover:translate-x-2">
                 <IconArrowRight />
               </span>
-            </button>
+            </button></Link>
           </div>
         </>
       ) : (

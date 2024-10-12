@@ -77,7 +77,7 @@ function Home() {
             ))}
           </section>
           <div className="flex justify-center items-center mt-4 md:mt-8">
-            <button className="font-semibold text-white bg-yellow-500 p-2 rounded-md">
+            <button className="font-semibold text-white bg-yellow-500 p-2 rounded-md" onClick={()=>{toast.error("We are adding quantities in our menu")}}>
               Load More
             </button>
           </div>
