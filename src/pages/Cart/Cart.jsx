@@ -151,6 +151,55 @@ function Cart() {
               </span>
             </button></Link>
           </div>
+
+          <div>
+           {products.length > 0 && <div className="md:hidde min-h-screen p-1">
+           
+            {
+              products.map((item)=>{
+                return(
+                  <div key={item._id} className=" bg-white shadow-lg rounded-md">
+                    <div key={item._id} className="mt-2 flex p-2 gap-2 items-cente">
+                      <div className="p-3">
+                        <img src={item.product.productImage} className="h-14 rounded-lg "/>
+                          <div className="flex w-1/4 items-center  ">
+                            <button
+                              className="px-2 py-1 rounded-sm font-bold text-2xl "
+                              onClick={() => handleDecreaseQuantity(item.product._id)}
+                            >
+                              -
+                            </button>
+                            <span className="px-3">{item.quantity}</span>
+                            <button
+                              className="px-2 py-1 rounded-sm font-bold text-2xl"
+                              onClick={() => handleIncreaseQuantity(item.product._id)}
+                            >
+                              +
+                            </button>
+                        </div>
+                      </div>
+                      <div>
+                        <h1 className="font-semibold text-xl">{item.product.productName}</h1>
+                        <span>{item.product.description}</span>
+                        <div className="font-bold">₹{item.product.price}</div>
+                      </div>
+                      
+                    </div>
+                   <div className="p-2 -mt-7">
+                      <button className="bg-red-400 w-full p-2 rounded-lg text-white hover:bg-red-500 " onClick={() => removeItemFromCart(item.product._id)}>Remove Item</button>
+                   </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+           
+          }
+           <div className="flex p-5 mx-2 rounded-lg items-center justify-between md:hidden">
+              <span className="font-semibold text-xl">Total : ₹{total}</span>
+              <button className="p-2 font-semibold text-white bg-orange-400 rounded w-auto px-4">Checkout</button>
+            </div>
+          </div>
         </>
       ) : (
         <FetchingCart />

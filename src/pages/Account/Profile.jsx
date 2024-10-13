@@ -2,8 +2,8 @@
 import Layout from "../../Layouts/Layout"
 import { useSelector } from "react-redux";
 import profileIcon from "../../assets/images/profileIcon.png"
-import {  FaTruck, FaUserCircle } from "react-icons/fa";
-import { FaChevronRight } from "react-icons/fa6";
+import {  FaBox, FaLocationArrow, FaTruck, FaUserCircle } from "react-icons/fa";
+import { FaChevronRight, FaLocationDot } from "react-icons/fa6";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useEffect } from "react";
 function Profile() {
@@ -16,7 +16,7 @@ function Profile() {
   
   return (
     <Layout>
-        <div className="flex w-full gap-5 h-screen p-5 justify-center bg-gray-100">
+        <div className=" hidden md:flex w-full gap-5 h-screen p-5 justify-center bg-gray-100">
             <div className="" style={{width:"23%"}}>
                 
                 <div className="flex h-16 shadow-lg bg-white">
@@ -79,6 +79,31 @@ function Profile() {
                 
             </div>
             <div className=" bg-white shadow-lg flex p-7 "style={{width:"70%"}}>
+                <Outlet/>
+            </div>
+        </div>
+
+        <div className="min-h-screen px-6 py-3 flex flex-col md:hidden">
+            <div>
+                <div>
+                    <h1 className="font-semibold text-xl">Hey!{username}</h1>
+                </div>
+                <div className="flex items-center justify-center border border-orange-300 mt-5 p-2 rounded ">
+                    <button className="flex items-center gap-3 font-semibold "><FaBox className="text-orange-400"/>My Orders</button>
+                </div>
+                <div className="mt-5 flex justify-center items-center p-2 bg-orange-300 rounded shadow-xl">
+                    <h2 className="font-semibold ">Account Setting</h2>
+                </div>
+                <div className="flex w-full gap-2">
+                    <div className="w-1/2 flex items-center justify-center border border-orange-300 mt-5 p-2 rounded ">
+                        <Link to={'/profile/account-settings'}><span className="h-auto flex items-center gap-3 font-semibold "><FaUserCircle className="text-orange-400" size={20}/>Edit Profile</span></Link>
+                    </div>
+                        <div className="w-1/2 flex items-center justify-center border border-orange-300 mt-5 p-2 rounded ">
+                            <Link to={'/profile/manage-address'}><span className="flex items-center gap-3 font-semibold "><FaLocationDot className="text-orange-400"/>Manage Address</span></Link>
+                        </div>
+                </div>
+            </div>
+            <div className="mt-10 bg-gray-100 rounded md:mt-0 md:bg-none md:rounded-none">
                 <Outlet/>
             </div>
         </div>
